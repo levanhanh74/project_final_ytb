@@ -1,34 +1,29 @@
-import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from './redux/slides/counterSlices';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import styled from 'styled-components';
-import { Button, DatePicker } from 'antd';
 
+import routePage from './Route/router';
+import DefaultComponent from './components/DeFaultComponent/DefaultComponent';
+import NotFoundPage from './pages/NotFoundPage/notFoundPage';
 
 function App() {
-  const count = useSelector(state => state.counter.value)
-  const dispatch = useDispatch()
+
   return (
     <div className="App">
-      <h1>Hello App Ecomic</h1>
-      <div>
-        <DatePicker />
-        <Button
-          type="ghost"
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
-        </Button>
-        <span>{count}</span>
-        <Button
-          type="primary"
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          Increment
-        </Button>
-      </div>
+      <Router>
+        <Routes>
+          {
+            routePage.map((route) => {
+              const Page = route.page;
+              const Layout = route.isNotFound ? DefaultComponent : NotFoundPage; // if route === true render default Layout else render compent NotFount.
+              return (
+                <Route key={route.path} path={route.path}
+                  element={<Layout><Page /></Layout>}
+                />
+              );
+            })
+          }
+        </Routes>
+      </Router>
     </div>
   );
 }
