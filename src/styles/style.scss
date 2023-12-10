@@ -1,0 +1,59 @@
+@import-normalize;
+
+.row {
+    --bs-gutter-x: 0rem;
+}
+.header{
+    height: 80px;
+    // border: 1px solid black; /// Chap xoa
+    line-height: 80px;
+
+    .header_logo{ // logo header
+        letter-spacing: 2px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .header_search{ // header search
+
+    }
+    .header_customer_account { // header Account
+         display:  flex;
+         margin: auto;
+        .header_customer_col_account_icon{
+            font-size: 25px;
+            margin: 0 20px;
+            .header_customer_col_account_account_login{
+            
+            }
+        }
+    }
+}
+// Nav Type Product
+.nav_type_customer_element_link{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(129 128 138);
+    &:hover{
+        color: blue;
+        font-weight: 620;
+        text-decoration: underline;
+        transition: all ease-in-out .5s;
+    }
+}
+.nav_type_product{
+       margin: 0 auto; 
+        /* color: inherit; */
+        /* border: 0; */
+        border-top: var(--bs-border-width) solid; 
+        opacity: .25;
+}
+
+
+// Slider IMg
+.bg_slider_img{
+    background-color: #efefef;
+    .customer_Slider_img{
+        margin: 0 auto;
+    
+    }
+}

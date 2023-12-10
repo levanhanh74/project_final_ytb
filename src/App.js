@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import routePage from './Route/router';
 import DefaultComponent from './components/DeFaultComponent/DefaultComponent';
@@ -8,7 +9,7 @@ import NotFoundPage from './pages/NotFoundPage/notFoundPage';
 function App() {
 
   return (
-    <div className="App">
+    <div className="app_container">
       <Router>
         <Routes>
           {
