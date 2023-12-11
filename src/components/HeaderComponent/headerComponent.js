@@ -3,8 +3,8 @@ import TypeProduct from "../TypeProduct/typeProduct";
 
 function HeaderComponent() {
     return (<>
-        <header className="header bg-primary topnav">
-            <div className="text-center">
+        <header className="bg-primary">
+            <div className="header container">
                 <div className="row">
                     {/* header Logo */}
                     <div className="col-3">

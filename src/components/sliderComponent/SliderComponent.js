@@ -13,7 +13,7 @@ function SliderComponent() {
         autoplaySpeed: 2000,
         slidesToScroll: 1,
     };
-    return (<>
+    return (<div className="container">
         <Slider {...settings}>
             {
                 arrImg.map((value, index) => {
@@ -25,6 +25,6 @@ function SliderComponent() {
                 })
             }
         </Slider>
-    </>);
+    </div>);
 }
 export default SliderComponent;
