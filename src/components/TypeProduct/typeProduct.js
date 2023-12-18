@@ -4,7 +4,7 @@ function TypeProduct() {
     return (
         <>
 
-            <ul className="nav justify-content-center nav_type_customer">
+            <ul className="nav justify-content-center nav_type_customer m-2">
                 {
                     arrType.map(value => {
                         return (
