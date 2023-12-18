@@ -13,7 +13,7 @@ function SliderComponent() {
         autoplaySpeed: 2000,
         slidesToScroll: 1,
     };
-    return (<div className="container">
+    return (<div className="container w-sml-100">
         <Slider {...settings}>
             {
                 arrImg.map((value, index) => {

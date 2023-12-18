@@ -1,4 +1,4 @@
-function CartComponent() {
+function CardComponent() {
     return (
         <div className="container_cart">
             <div className="card customer_cart m-1" >
@@ -17,4 +17,4 @@ function CartComponent() {
     );
 }
 
-export default CartComponent;
+export default CardComponent;
