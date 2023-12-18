@@ -3,13 +3,14 @@ import "slick-carousel/slick/slick-theme.css";
 import SliderComponent from "../../components/sliderComponent/SliderComponent";
 import CardComponent from "../../components/cardComponent/CardComponent";
 import NavBarComponent from "../../components/navBarComponent/NavBarComponent";
+import TypeProduct from "../../components/TypeProduct/typeProduct";
 
 function HomePage() {
 
 
     return (
         <>
-
+            <TypeProduct />
             <SliderComponent />
             <div className="container mt-5">
                 <div className="row ">

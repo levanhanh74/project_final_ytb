@@ -1,3 +1,4 @@
+import DetailProductPage from "../pages/DetailProductPage/detailProductPage";
 import HomePage from "../pages/HomePage/homePage";
 import LoginPage from "../pages/LoginPage/loginPage";
 import NotFoundPage from "../pages/NotFoundPage/notFoundPage";
@@ -35,6 +36,11 @@ const routePage = [
     {
         page: ProductPage,
         path: "/product",
+        isNotFound: true,
+    },
+    {
+        page: DetailProductPage,
+        path: "product/detailPrd",
         isNotFound: true,
     },
     {

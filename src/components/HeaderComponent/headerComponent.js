@@ -1,4 +1,4 @@
-import TypeProduct from "../TypeProduct/typeProduct";
+
 
 
 function HeaderComponent() {
@@ -56,7 +56,6 @@ function HeaderComponent() {
                 </div>
             </nav>
         </header >
-        <TypeProduct />
     </>);
 }
 
