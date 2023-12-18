@@ -1,107 +1,102 @@
 @import-normalize;
 
+
 .row {
     --bs-gutter-x: 0rem;
 }
-.app_container{
+.app_container {
     width: 100%;
-    .header{
-        height: 80px;
-        // border: 1px solid black; /// Chap xoa
+
+    .header {
+        max-height: 80px;
+        min-height: 80px;
         line-height: 80px;
+    }
 
-        .header_logo{ // logo header
-            letter-spacing: 2px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-        .header_search{ // header search
 
-        }
-        .header_customer_account { // header Account
-            display:  flex;
-            margin: auto;
-            .header_customer_col_account_icon{
-                font-size: 25px;
-                margin: 0 20px;
-                .header_customer_col_account_account_login{
-                
-                }
-            }
+    // Nav Type Product
+    .nav_type_customer_element_link {
+        font-size: 14px;
+        font-weight: 600;
+        transition: all linear 0.4s;
+        color: rgb(129 128 138);
+
+        &:hover {
+            color: blue;
+            font-weight: 620;
+            text-decoration: underline;
+            transition: all ease-in-out .5s;
         }
     }
-}
-// Nav Type Product
-.nav_type_customer_element_link{
-    font-size: 14px;
-    font-weight: 600;
-    transition: all linear 0.4s;
-    color: rgb(129 128 138);
-    &:hover{
-        color: blue;
-        font-weight: 620;
-        text-decoration: underline;
-        transition: all ease-in-out .5s;
-    }
-}
-.nav_type_product{
-       margin: 0 auto; 
+
+    .nav_type_product {
+        margin: 0 auto;
         /* color: inherit; */
         /* border: 0; */
-        border-top: var(--bs-border-width) solid; 
+        border-top: var(--bs-border-width) solid;
         opacity: .25;
-}
-
-
-// Slider IMg
-.bg_slider_img{
-    background-color: #efefef;
-    .customer_Slider_img{
-        margin: 0 auto;
-        width: 100%;
     }
-}
 
 
-// Cart Home 
-.customer_cart{
-    max-width: 18rem;
-    transition: all linear 0.4s;
-    &:hover{
-        box-shadow: 0 0.5rem 1rem  rgba(0, 0, 0, 0.15);
-    }
-    .customer_cart_feedback{
-        font-weight: 400;
-        font-size: 14px;
-        margin: 0;
-        padding: 8px;
-        .customer_cart_feedback_icon{
-            color: yellow;
-            padding: 0 0.2rem;
+    // Slider IMg
+    .bg_slider_img {
+        background-color: #efefef;
+
+        .customer_Slider_img {
+            margin: 0 auto;
+            width: 100%;
         }
     }
-    .customer_cart_img{
-        width: 100%;
-        min-height: 10rem;
-    }
-    .customer_cart_title{
-        padding: 8px;
-        .customer_cart_title_el{
+
+
+    // Cart Home 
+    .customer_cart {
+        max-width: 18rem;
+        transition: all linear 0.4s;
+
+        &:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .customer_cart_feedback {
+            font-weight: 400;
+            font-size: 14px;
             margin: 0;
-            text-transform: capitalize;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-    }
-    .customer_cart_price{
-        padding: 8px;
-        font-size: 14px;
-        color: red;
-        font-weight: 500;
-        .customer_cart_price_small{
-            font-size: 10px;
-        }
-    }
+            padding: 8px;
 
+            .customer_cart_feedback_icon {
+                color: yellow;
+                padding: 0 0.2rem;
+            }
+        }
+
+        .customer_cart_img {
+            width: 100%;
+            min-height: 10rem;
+        }
+
+        .customer_cart_title {
+            padding: 8px;
+
+            .customer_cart_title_el {
+                margin: 0;
+                text-transform: capitalize;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        .customer_cart_price {
+            padding: 8px;
+            font-size: 14px;
+            color: red;
+            font-weight: 500;
+
+            .customer_cart_price_small {
+                font-size: 10px;
+            }
+        }
+
+    }
 }
