@@ -19,7 +19,7 @@ function NavBarComponent() {
             case "star":
                 return option.map(value => {
                     return (
-                        <div key={value.label} className="m-2 d-flex">
+                        <div key={value.numStar} className="m-2 d-flex">
                             <li className="list-unstyled pe-2">{value.iconStar}</li>
                             <li className="list-unstyled">tu {value.numStar} sao</li>
                         </div>
@@ -28,7 +28,7 @@ function NavBarComponent() {
             case "price":
                 return option.map(value => {
                     return (
-                        <div className="d-block mt-2">
+                        <div className="d-block mt-2" key={value}>
                             <li className="bg-info text-light list-unstyled d-inline ps-2 pe-2 pt-1 pb-1 rounded-4">{value}</li>
                         </div>
                     )

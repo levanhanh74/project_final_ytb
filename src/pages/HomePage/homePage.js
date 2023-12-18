@@ -14,7 +14,7 @@ function HomePage() {
             <div className="container mt-5">
                 <div className="row ">
                     <div className="col-lg-3 col-sm-3 ">
-                    <NavBarComponent/>
+                        <NavBarComponent />
                     </div>
                     <div className="col-9">
                         <div className="row customer_cart_col ">
