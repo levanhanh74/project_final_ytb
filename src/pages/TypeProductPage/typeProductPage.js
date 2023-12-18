@@ -32,16 +32,16 @@ function TypeProductPage() {
                     <nav aria-label="Page navigation example">
                         <ul className="pagination justify-content-center mt-3">
                             <li className="page-item">
-                                <a className="page-link" href="#" aria-label="Previous">
+                                <a className="page-link" hrefLang="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span className="sr-only">Previous</span>
                                 </a>
                             </li>
-                            <li className="page-item"><a className="page-link" href="#">1</a></li>
-                            <li className="page-item"><a className="page-link" href="#">2</a></li>
-                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                            <li className="page-item"><a className="page-link" hrefLang="#">1</a></li>
+                            <li className="page-item"><a className="page-link" hrefLang="#">2</a></li>
+                            <li className="page-item"><a className="page-link" hrefLang="#">3</a></li>
                             <li className="page-item">
-                                <a className="page-link" href="#" aria-label="Next">
+                                <a className="page-link" hrefLangLang="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span className="sr-only">Next</span>
                                 </a>

@@ -1,14 +1,16 @@
-
-
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function HeaderComponent() {
+    const useSelectorUser = useSelector(state => state.user);
+    console.log(useSelectorUser);
     return (<>
         <header className="bg-primary">
             <nav className="navbar navbar-expand-lg navbar-light p-4 ">
                 <div className="container-fluid container container-sm container-md">
                     {/* header logo */}
                     <div className="col-3">
-                        <a className="navbar-brand text-light fs-lg-4 fs-sm-6 fw-normal fst-italic" href="#">SHOPITPRICECHEAP</a>
+                        <Link className="navbar-brand text-light fs-lg-4 fs-sm-6 fw-bold fst-italic" to="/">SHOPITPRICECHEAP</Link>
                     </div>
                     {/* Toggle mobile */}
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,18 +37,24 @@ function HeaderComponent() {
                                         <div className="header_customer_col_account_icon pe-2 ">
                                             <i className="fa-solid fa-user text-light fs-4"></i>
                                         </div>
-                                        <div className="header_customer_col_account_account_login d-block float-start ">
-                                            <h6><a className="text-light text-decoration-none" href="#">Register/Login</a></h6>
-                                            <h6><a className=" float-none text-light text-decoration-none" href="#">Account</a></h6>
-                                        </div>
+                                        {
+                                            useSelectorUser.name ?
+                                                <div className="header_customer_col_account_account_login d-block float-start">
+                                                    <h6><Link className=" float-none text-light text-decoration-none" to="#">{useSelectorUser.name || useSelectorUser.email}</Link></h6>
+                                                </div> :
+                                                <div className="header_customer_col_account_account_login d-block float-start ">
+                                                    <h6><Link className="text-light text-decoration-none" to={"/login"}>Register/Login</Link></h6>
+                                                    <h6><Link className=" float-none text-light text-decoration-none" to="#">Account</Link></h6>
+                                                </div>
+                                        }
                                         <div className="header_customer_col_account_cart_cart d-sm-block ps-lg-3 ps-sm-0">
-                                            <a href="#" className="text-light text-decoration-none position-relative">
+                                            <Link to="#" className="text-light text-decoration-none position-relative">
                                                 <i className="fa-solid header_customer_col_account_cart_cart_icon fa-cart-shopping customer_cart pe-1 fs-4"></i>
                                                 Cart
                                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                                     12
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
