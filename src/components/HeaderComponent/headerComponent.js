@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function HeaderComponent() {
     const useSelectorUser = useSelector(state => state.user);
-    console.log(useSelectorUser);
+    // console.log(useSelectorUser);
     return (<>
         <header className="bg-primary">
             <nav className="navbar navbar-expand-lg navbar-light p-4 ">

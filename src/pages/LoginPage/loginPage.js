@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as LoginUser from "../../services/UserService";
 import { UseMutationHook } from "../../Hooks/UseMutationHook";
 import { toast } from "react-toastify";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateUser } from "../../redux/slides/userSlices";
 
 function LoginPage() {
@@ -20,13 +20,14 @@ function LoginPage() {
     const navigate = useNavigate();
 
     const dispatchUser = useDispatch();
-    
+
     const mutation = UseMutationHook((data) => {
         return LoginUser.UserLoginSerVice(data)
     })
 
-    const { data } = mutation;
-    // console.log("data: ", data);
+    const { data } = mutation; // get value out 
+    // console.log("access_token: ", data?.access_token);
+
     const isCheckLogin = data?.status === "OK";
     // console.log("isCheckLogin: ", isCheckLogin);
 
@@ -39,7 +40,6 @@ function LoginPage() {
         const getEmail = e.target.value;
         setEmail(getEmail)
     }
-
     // Check user have enter true with email.
     const checkEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
     const handleLogin = () => {
@@ -58,32 +58,34 @@ function LoginPage() {
         }
 
     }
+
     // Handle getUser API with backend 
     const handleGetDetailUser = async (id, access_token) => {
-        console.log(id, access_token);
+        // console.log(id, access_token);
+        const refresh_Token = JSON.parse(localStorage.getItem('refresh_Token'));
         const res = await LoginUser.UserDetailSerVice(id, access_token);
-        console.log("res: ", res);
+
+        dispatchUser(updateUser({ name: res?.data.dataNew.name, email: res?.data.dataNew.email, access_token: data?.access_token, refresh_Token }));
+        // console.log("res: ", res);
     }
     // handle validate when user enter log error or next step.
     useEffect(() => {
         if (data?.status) {
             const messesLogin = isCheckLogin ? data?.message : data?.message;
-            if (data?.status === "OK") {
+            if (data?.status === "OK") {  /// Login success
                 // console.log("MutationData: ", data.access_token);
-                if (data?.access_token) {
-                    // localStorage.setItem("access_Token", data?.access_token);
+                if (data?.access_token) {  /// success save access_token into localStorage and decode that accessToken. Compare 
+                    localStorage.setItem("access_Token", JSON.stringify(data?.access_token));
+                    localStorage.setItem('refresh_Token', JSON.stringify(data?.refresh_token));
                     const decode = jwtDecode(data?.access_token);
-                    
+
                     // console.log("decode: ", data?.data._id);
                     if (decode?.id === data?.data._id) {
                         // console.log("data: ", data);
-
                         // handle move data to backend 
-                        const dehandle = handleGetDetailUser(decode?.id, data?.access_token);
+                        handleGetDetailUser(decode?.id, data?.access_token);
 
-                        dispatchUser(updateUser({ name: data?.data.name, email: data?.data.email, access_token: data?.access_token }));
                         navigate('/')
-
                         toast.success(messesLogin)
                         setValidationErrEmail('');
                         setValidationErrPass("");
@@ -93,7 +95,7 @@ function LoginPage() {
                     }
                 }
 
-            } else {   /// Log error from backend 
+            } else {   /// Log error from backend and display validate.
                 if (data.message === "This user not isset, please email difference!") {
                     toast.warning(messesLogin)
                     setValidationErrLogin(messesLogin);
@@ -128,7 +130,7 @@ function LoginPage() {
                             </div>
                             <div className="form-group mt-2">
                                 {/* <label for="exampleInputPassword1">Password</label> */}
-                                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
+                                <input type="password" autoComplete="true" className="form-control" id="exampleInputPassword1" placeholder="Password"
                                     value={password}
                                     // onChange={e => setPassword(e.target.value)}
                                     onChange={handleOpacityPass}
