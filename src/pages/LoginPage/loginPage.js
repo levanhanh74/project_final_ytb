@@ -56,7 +56,6 @@ function LoginPage() {
             };
             mutation.mutate(data);
         }
-
     }
 
     // Handle getUser API with backend 
@@ -65,7 +64,7 @@ function LoginPage() {
         const refresh_Token = JSON.parse(localStorage.getItem('refresh_Token'));
         const res = await LoginUser.UserDetailSerVice(id, access_token);
 
-        dispatchUser(updateUser({ name: res?.data.dataNew.name, email: res?.data.dataNew.email, access_token: data?.access_token, refresh_Token }));
+        dispatchUser(updateUser({ ...res, name: res?.data.dataNew.name, email: res?.data.dataNew.email, access_token: data?.access_token, refresh_Token }));
         // console.log("res: ", res);
     }
     // handle validate when user enter log error or next step.
@@ -73,19 +72,19 @@ function LoginPage() {
         if (data?.status) {
             const messesLogin = isCheckLogin ? data?.message : data?.message;
             if (data?.status === "OK") {  /// Login success
-                // console.log("MutationData: ", data.access_token);
-                if (data?.access_token) {  /// success save access_token into localStorage and decode that accessToken. Compare 
+                // console.log("MutationData: ", data  );
+                if (data?.access_token) {  /// success save access_token into localStorage and decode_access_token that accessToken. Compare 
                     localStorage.setItem("access_Token", JSON.stringify(data?.access_token));
                     localStorage.setItem('refresh_Token', JSON.stringify(data?.refresh_token));
-                    const decode = jwtDecode(data?.access_token);
-
-                    // console.log("decode: ", data?.data._id);
-                    if (decode?.id === data?.data._id) {
+                    const decode_access_token = jwtDecode(data?.access_token);
+                    console.log("LoginPage: ", data);
+                    // console.log("decode_access_token: ", data?.data._id);
+                    if (decode_access_token?.id === data?.data._id) {
                         // console.log("data: ", data);
                         // handle move data to backend 
-                        handleGetDetailUser(decode?.id, data?.access_token);
+                        handleGetDetailUser(decode_access_token?.id, data?.access_token);
 
-                        navigate('/')
+                        navigate('/');
                         toast.success(messesLogin)
                         setValidationErrEmail('');
                         setValidationErrPass("");
@@ -108,9 +107,6 @@ function LoginPage() {
             }
         }
     }, [data])
-
-
-
     return (<>
         <div className="container">
             <div className="row mt-5 rounded-3 border">

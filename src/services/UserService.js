@@ -26,8 +26,23 @@ const UserDetailSerVice = async (id, access_token) => {
 const Refresh_token = async (refresh_token) => {
     const getApi = await axios.post(`${process.env.REACT_APP_BASE_PRODUCT}user/refreshToken`, {
         headers: { token: refresh_token }, // this prototy it auto send request when token current end time.
-        withCredentials: true
-    })
+        withCredentials: true  // re-call when token end time
+    });
     return await getApi.data
 }
-export { UserDetailSerVice, UserLoginSerVice, UserSignUpSerVice, Refresh_token, axiosJWT }
+
+const UserUpdateSerVice = async ({ id, dataRest, access_token }) => {
+    console.log("_id: ", id, " dataRest: ", dataRest, " accesstoken: ", access_token);
+    const getApi = await axiosJWT.put(`${process.env.REACT_APP_BASE_PRODUCT}user/update/${id}`, dataRest, {
+        headers: { token: access_token },
+    });
+    console.log("getUpdate: ", await getApi.data);
+    return await getApi.data
+}
+
+
+const LogOutUser = async () => {
+    const getApi = await axios.post(`${process.env.REACT_APP_BASE_PRODUCT}user/logout`)
+    return await getApi.data
+}
+export { UserDetailSerVice, UserLoginSerVice, UserSignUpSerVice, Refresh_token, axiosJWT, UserUpdateSerVice, LogOutUser }

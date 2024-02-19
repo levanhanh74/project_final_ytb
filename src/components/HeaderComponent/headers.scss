@@ -1,0 +1,13 @@
+
+
+.hover_info b  {
+    font-size: 14px;
+    font-weight: 600;
+    transition: all linear 0.3s;
+    cursor: pointer;
+    &:hover{
+        background-color: antiquewhite;
+        color: blue;
+    }
+  
+}

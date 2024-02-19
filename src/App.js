@@ -24,14 +24,12 @@ function App() {
   const dispatch = useDispatch();
   // Handle detail user 
   const handleGetDetailUser = async (id, access_token) => {
-
     const res = await LoginUser.UserDetailSerVice(id, access_token);
     const refresh_Token = JSON.parse(localStorage.getItem('refresh_Token'));
-    // console.log("res: ", refresh_Token);
+    // console.log("useSelectorUser: ", res);
     dispatch(updateUser({ ...res?.data?.dataNew, access_token, refresh_Token }));
-
   }
-
+  // console.log("res: ", useSelectorUser);
   // Save token into localStorage. When reload brower it will call  localStorage for can access info into dataBase.
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +47,7 @@ function App() {
   // handleDecode 
   const handleDecode = async () => {
     let getItemLoginAccessToken = useSelectorUser?.access_token || localStorage.getItem("access_Token");
-    // console.log("getItemLoginAccessToken: ", isCheckJSONString(getItemLoginAccessToken));
+    // console.log("getItemLoginAccessToken: ", getItemLoginAccessToken);
     let decode_AccessToken = {};
     if (getItemLoginAccessToken && isCheckJSONString(getItemLoginAccessToken) && !useSelectorUser?.access_token) {
       getItemLoginAccessToken = JSON.parse(getItemLoginAccessToken);
@@ -65,33 +63,16 @@ function App() {
     const { decode_AccessToken } = await handleDecode(); // getAccess_Token
     const refresh_Token = JSON.parse(localStorage.getItem('refresh_Token')); // getRefresh_token at localStorage.
     const decodeRefresh_Token = jwtDecode(refresh_Token); // parse refresh_Token to info from database.
-
     if (decode_AccessToken?.exp < currentTime.getTime() / 1000) {
       if (decodeRefresh_Token?.exp > currentTime.getTime() / 1000) {
-        const dataRefresh_Token = await LoginUser.Refresh_token(refresh_Token);
-
-        config.headers['token'] = dataRefresh_Token?.data.access_token
+        const dataRef = await LoginUser.Refresh_token(refresh_Token);
+        // console.log("dataRef: ", dataRef);
+        config.headers['token'] = `${dataRef?.access_token}`  // set token when callback into backend it will get token from router detailUSer
       } else {
         dispatch(resetUser());
       }
     }
     return config;
-
-
-    // const currentTime = new Date()
-    // const { decoded } = handleDecoded()
-    // let storageRefreshToken = localStorage.getItem('refresh_token')
-    // const refreshToken = JSON.parse(storageRefreshToken)
-    // const decodedRefreshToken =  jwt_decode(refreshToken)
-    // if (decoded?.exp < currentTime.getTime() / 1000) {
-    //   if(decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
-    //     const data = await UserService.refreshToken(refreshToken);
-    //     config.headers['token'] = `Bearer ${data?.access_token}`
-    //   }else {
-    //     dispatch(resetUser())
-    //   }
-    // }
-    // return config;
   },
     function (error) {
       return Promise.reject(error);
@@ -109,8 +90,7 @@ function App() {
               return (
                 <Route key={route.path} path={route.path}
                   element={<Layout><Page /></Layout>}
-                />
-              );
+                />)
             })
           }
         </Routes>

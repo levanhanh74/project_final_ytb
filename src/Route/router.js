@@ -6,6 +6,7 @@ import OrderPage from "../pages/OrderPage/orderPage";
 import ProductPage from "../pages/ProductPage/productPage";
 import SignUpPage from "../pages/SignUpPage/signUpPage";
 import TypeProductPage from "../pages/TypeProductPage/typeProductPage";
+import ProfilePage from "../pages/ProfilePage/profilePage";
 
 const routePage = [
     {
@@ -40,7 +41,12 @@ const routePage = [
     },
     {
         page: DetailProductPage,
-        path: "product/detailPrd",
+        path: "/product/detailPrd",
+        isNotFound: true,
+    },
+    {
+        page: ProfilePage,
+        path: "/user/profile",
         isNotFound: true,
     },
     {

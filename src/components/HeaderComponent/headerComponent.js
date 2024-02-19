@@ -1,9 +1,28 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import "../HeaderComponent/headers.scss";
+import * as LoginUser from "../../services/UserService";
+import { resetUser } from "../../redux/slides/userSlices";
+import { toast } from "react-toastify";
+
 
 function HeaderComponent() {
     const useSelectorUser = useSelector(state => state.user);
-    // console.log(useSelectorUser);
+    const navigate = useNavigate();
+
+
+    // console.log("useSelectorUser: ", useSelectorUser);
+    const dispatch = useDispatch();
+
+    const handleLogOutUser = async () => {
+        const resLogOut = await LoginUser.LogOutUser();
+        dispatch(resetUser());// delete all state at reduxToolkit
+        localStorage.setItem("refresh_Token", '');
+        localStorage.setItem("access_Token", '');
+        document.cookie = 'refresh_token=';
+        navigate('/')
+        toast.success(resLogOut?.message);
+    }
     return (<>
         <header className="bg-primary">
             <nav className="navbar navbar-expand-lg navbar-light p-4 ">
@@ -38,13 +57,22 @@ function HeaderComponent() {
                                             <i className="fa-solid fa-user text-light fs-4"></i>
                                         </div>
                                         {
-                                            useSelectorUser.name ?
-                                                <div className="header_customer_col_account_account_login d-block float-start">
-                                                    <h6><Link className=" float-none text-light text-decoration-none" to="#">{useSelectorUser.name || useSelectorUser.email}</Link></h6>
-                                                </div> :
+                                            useSelectorUser.name || useSelectorUser.email ? // have user
+                                                <div className="header_customer_col_account_account_login d-block float-start navbar nav-item dropdown">
+                                                    <ul className="nav nav-pills">
+                                                        <h6 className="nav-item dropdown">
+                                                            <Link className="nav-link dropdown-toggle float-none text-light text-decoration-none" data-bs-toggle="dropdown" role="button" aria-expanded="false" to="#">{useSelectorUser.name || useSelectorUser.email}</Link>
+                                                            <ul className="dropdown-menu p-0">
+                                                                <li className="bg-white hover_info m-1 rounded"><Link className="dropdown-item rounded" to="/user/profile">Information</Link></li>
+                                                                <li className="bg-white hover_info m-1 rounded"><b className="dropdown-item rounded" onClick={handleLogOutUser}>LogOut</b></li>
+                                                            </ul>
+                                                        </h6>
+                                                    </ul>
+                                                </div>
+                                                : // Not username
                                                 <div className="header_customer_col_account_account_login d-block float-start ">
-                                                    <h6><Link className="text-light text-decoration-none" to={"/login"}>Register/Login</Link></h6>
-                                                    <h6><Link className=" float-none text-light text-decoration-none" to="#">Account</Link></h6>
+                                                    <h6><Link className="text-light text-decoration-none" to={"/signup"}>Register/Login</Link></h6>
+                                                    <h6><Link className=" float-none text-light text-decoration-none" to="/login">Account</Link></h6>
                                                 </div>
                                         }
                                         <div className="header_customer_col_account_cart_cart d-sm-block ps-lg-3 ps-sm-0">
